@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>选一个吧～</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #kiss {
+            background-color: #ff4d6d;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        #nokiss {
+            background-color: #ffffff;
+            color: #ff4d6d;
+        }
+
+        .message {
+            margin-top: 30px;
+            font-size: 30px;
+            color: #fff;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>你要不要亲我一下？</h1>
+
+    <div class="buttons" id="buttons">
+        <button id="kiss">亲我</button>
+        <button id="nokiss">不亲</button>
+    </div>
+
+    <div class="message" id="message">嘻嘻，开心 💖</div>
+</div>
+
+<script>
+    let refuseCount = 0;
+    const kissBtn = document.getElementById("kiss");
+    const noKissBtn = document.getElementById("nokiss");
+    const message = document.getElementById("message");
+    const buttons = document.getElementById("buttons");
+
+    // 点「亲我」
+    kissBtn.onclick = () => {
+        buttons.style.display = "none";   // 所有按钮消失
+        message.style.display = "block";  // 只显示开心
+    };
+
+    // 点「不亲」
+    noKissBtn.onclick = () => {
+        refuseCount++;
+
+        const kissSize = 20 + refuseCount * 10;
+        const noKissSize = Math.max(18 - refuseCount * 4, 8);
+
+        kissBtn.style.fontSize = kissSize + "px";
+        noKissBtn.style.fontSize = noKissSize + "px";
+        kissBtn.style.padding =
+            (15 + refuseCount * 5) + "px " +
+            (30 + refuseCount * 10) + "px";
+
+        if (refuseCount >= 3) {
+            noKissBtn.remove();
+        }
+    };
+</script>
+</body>
+</html>
